@@ -57,6 +57,8 @@ func main() {
 	// 			THIS rpc var is built in
 	err = rpc.Register(new(RPCServer))
 	go app.rpcListen()
+
+	go app.gRPCListen()
 	//start web server
 
 	log.Printf("Starting service on port %s\n", webPort)
