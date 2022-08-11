@@ -20,5 +20,5 @@ message LogRequest {
 
 // define what function will be ran
 service LogService {
-  rpc WriteLog(LogRequest) returns (LogResponse)
+  rpc WriteLog(LogRequest) returns (LogResponse);
 }
