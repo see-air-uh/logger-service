@@ -5,13 +5,16 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"net/http"
 	"net/rpc"
 	"time"
 
 	"github.com/see-air-uh/logger-service/data"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+
+	_ "github.com/jackc/pgconn"
+	_ "github.com/jackc/pgx/v4"
+	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
 const (
@@ -58,19 +61,19 @@ func main() {
 	err = rpc.Register(new(RPCServer))
 	go app.rpcListen()
 
-	go app.gRPCListen()
+	app.gRPCListen()
 	//start web server
 
-	log.Printf("Starting service on port %s\n", webPort)
-	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%s", webPort),
-		Handler: app.routes(),
-	}
+	// log.Printf("Starting service on port %s\n", webPort)
+	// srv := &http.Server{
+	// 	Addr:    fmt.Sprintf(":%s", webPort),
+	// 	Handler: app.routes(),
+	// }
 
-	err = srv.ListenAndServe()
-	if err != nil {
-		log.Panic()
-	}
+	// err = srv.ListenAndServe()
+	// if err != nil {
+	// 	log.Panic()
+	// }
 
 }
 
